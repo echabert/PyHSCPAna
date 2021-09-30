@@ -30,6 +30,7 @@ def LoadPlots(filename, alpha=0.5):
                     #command="{axis}.hist("+str(d.get('xvar'))
                     command="{axis}.hist(data['"+str(d.get('xvar'))+"']"
                     command+=",alpha="+str(alpha)
+                    if eval(d.get('ylog','False')) : command+=",log=True"
                     if d.get('xbins',False):
                         command+=",bins = "+str(d['xbins'])
                 if d['type']=='2d' and d.get('xvar',False) and d.get('yvar',False):
@@ -70,6 +71,7 @@ def FillPlots(filename,fig,ax,nx,ny,label='',**data):
     for c in commands.split('\n'):
         print(c)
         tmp=""
+
         if ny>1:
             tmp="app = c.format(axis"+"='ax["+str(ix)+"]["+str(iy)+"]'"+",label='"+str(label)+"')"
         else:
