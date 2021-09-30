@@ -6,11 +6,8 @@ import matplotlib.pyplot as plt
 # Assume that the data collection fill find in a dictionnary: data[variable] 
 #
 # To-do:
-# - add x/y logscale
 # - add title
 # - add possibility to choose the range
-# - add transparenty
-# - add normalization to unity
 
 def LoadPlots(filename, alpha=0.5):
     commands=""
@@ -31,6 +28,7 @@ def LoadPlots(filename, alpha=0.5):
                     command="{axis}.hist(data['"+str(d.get('xvar'))+"']"
                     command+=",alpha="+str(alpha)
                     if eval(d.get('ylog','False')) : command+=",log=True"
+                    if eval(d.get('norm','False')) : command+=",density=True"
                     if d.get('xbins',False):
                         command+=",bins = "+str(d['xbins'])
                 if d['type']=='2d' and d.get('xvar',False) and d.get('yvar',False):
